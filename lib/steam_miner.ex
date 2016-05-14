@@ -1,0 +1,2 @@
+defmodule SteamMiner do
+end
