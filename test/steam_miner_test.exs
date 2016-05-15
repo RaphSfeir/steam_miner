@@ -6,12 +6,16 @@ defmodule SteamMinerTest do
     assert 1 + 1 == 2
   end
 
-  test "Simple HTTPoison request to Phobos Project" do
+  test "HttpDownloader get a simple valid request to Phobos Project" do
     assert {:ok, _} = SteamMiner.HttpDownloader.get_http_url("http://www.phobosproject.com") 
   end
 
-  test "Parse some HTML Document" do
-    
+  test "Http downloader get an invalid url results in an error" do
+    assert {:error, _} = SteamMiner.HttpDownloader.get_http_url("http://doesnotexiststhisshit.com")
+  end
+
+  test "Get div content of HTML document" do
+    assert {:ok, content: "This is a div."} = SteamMiner.HttpParser.get_div_value("<html><div>This is a div.</div></html>")
   end
 
 end

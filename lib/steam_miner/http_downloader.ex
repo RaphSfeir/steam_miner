@@ -1,11 +1,11 @@
 defmodule SteamMiner.HttpDownloader do
 
   def get_http_url(url) do
-    case HTTPoison.get! url do
-      %HTTPoison.Response{status_code: 200, body: body, headers: headers}
+    case HTTPoison.get url do
+      {:ok, %HTTPoison.Response{body: body, headers: headers, status_code: 200}}
       -> {:ok, body: body, headers: headers}
-      _ 
-      -> {:err, result: HTTPoison.get! url}
+      {:error, %HTTPoison.Error{id: _, reason: reason}} 
+      -> {:error, reason: reason}
     end
   end
 
