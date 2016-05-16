@@ -23,4 +23,7 @@ defmodule SteamMinerTest do
     assert {:ok, %{content: "Colons\n747En ligne\n0"}} = SteamMiner.HttpParser.get_div_value(result.body, "online_registered")
   end
 
+  test "Steam Store get Cyber City 2157 page with 200 status" do
+    assert {:ok, _} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/454690")
+  end
 end
