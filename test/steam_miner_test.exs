@@ -15,7 +15,12 @@ defmodule SteamMinerTest do
   end
 
   test "Get div content of HTML document" do
-    assert {:ok, content: "This is a div."} = SteamMiner.HttpParser.get_div_value("<html><div>This is a div.</div></html>")
+    assert {:ok, %{content: "This is a div."}} = SteamMiner.HttpParser.get_div_value("<html><div class='test'>This is a div.</div><div class='test2'>This too!</div></html>", "test")
+  end
+
+  test "Fetch remote HTML document, parse it and get specific value" do
+    {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://www.phobosproject.com")
+    assert {:ok, %{content: "Colons\n747En ligne\n0"}} = SteamMiner.HttpParser.get_div_value(result.body, "online_registered")
   end
 
 end
