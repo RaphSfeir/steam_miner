@@ -24,6 +24,7 @@ defmodule SteamMinerTest do
   end
 
   test "Steam Store get Cyber City 2157 page with 200 status" do
-    assert {:ok, _} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/454690")
+    assert {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/454690")
+    assert {:ok, %{content: "The Division"}} = SteamMiner.HttpParser.get_div_value(result.body, "apphub_AppName")
   end
 end

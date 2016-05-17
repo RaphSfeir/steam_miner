@@ -4,12 +4,15 @@ defmodule SteamMiner.HttpParser do
     find_res = Floki.find(html, "div." <> div_class)
 
     case find_res do 
-      [] 
-        -> {:error, %{reason: "Not found"}}
-      [_] 
+    [] 
+      ->
+        {:error, %{reason: "Not found"}}
+        [_] 
         -> 
-          {:ok, %{content: find_res |> Floki.text }}
+        {:ok, %{content: find_res |> Floki.text }}
+        _ -> 
+        {:error, find_res}
     end
   end
-  
+
 end
