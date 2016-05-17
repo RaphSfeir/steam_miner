@@ -1,7 +1,7 @@
 defmodule SteamMiner.HttpParser do
 
-  def get_div_value html, div_class do
-    find_res = Floki.find(html, "div." <> div_class)
+  def get_element_value html, element, class do
+    find_res = Floki.find(html, element <> "." <> class)
 
     case find_res do 
     [] 

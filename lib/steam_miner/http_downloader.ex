@@ -2,7 +2,7 @@ defmodule SteamMiner.HttpDownloader do
 
   def store_headers do
     [
-      { "Accept-Encoding", "gzip, deflate, sdch"},
+      { "Accept-Encoding", "utf8"},
       { "Accept-Language", "en-US,en;q=0.8,fr;q=0.6,de:q=0.4"},
       { "User-Agent"     , "Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"},
       {  "Accept"         , "text/html, application/xhtml+xml,application/xml" },
