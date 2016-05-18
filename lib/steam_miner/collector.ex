@@ -8,7 +8,7 @@ defmodule SteamMiner.Collector do
   end
 
   @doc """
-  Gets value from bucket
+  Gets value from collector 
   """
   def get(collector, key) do
     Agent.get(collector, &Map.get(&1, key))

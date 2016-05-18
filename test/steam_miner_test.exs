@@ -26,6 +26,6 @@ defmodule SteamMinerTest do
   test "Steam Store get Cyber City 2157 page with 200 status" do
     assert {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/454690")
     assert {:ok, %{content: "Cyber City 2157: The Visual Novel"}} = SteamMiner.HttpParser.get_element_value(result.body,"div", "apphub_AppName")
-    #   assert {:ok, %{content: "Positive"}} = SteamMiner.HttpParser.get_element_value(result.body,"span", "game_review_summary")
+    assert {:ok, %{content: "Positive"}} = SteamMiner.HttpParser.get_element_value(result.body,"span", "game_review_summary")
   end
 end
