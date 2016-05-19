@@ -35,9 +35,16 @@ defmodule SteamMiner.Collector do
     {:ok, %{result}}
   end
 
+  @doc """
+  Get the names
+  """
   def handle_call({:get}, _from, {names, _} = state) do
 
   end
+  
+  @doc """
+  Post to Steam Miner
+  """
 
   def handle_cast({:post, steam_id}, state) do
     alias SteamMiner.HttpDownloader
