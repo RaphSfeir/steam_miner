@@ -8,14 +8,14 @@ defmodule SteamMiner.Collector do
   """
 
   def start_link([]) do
-    GenServer.start_link(__MODULE__, :ok, name: SteamCollector)
+    :gen_server.start_link(__MODULE__, :ok, [])
   end
 
   @doc """
   looks up the bucket
   """
-  def get(steam_id) do
-    GenServer.call(SteamCollector, {:get, steam_id})
+  def get(pid, steam_id) do
+    :gen_server.call(pid, {:get, steam_id})
   end
 
   @doc """
@@ -37,11 +37,12 @@ defmodule SteamMiner.Collector do
   @doc """
   Get the names
   """
-  def handle_call({:get, steam_id}, _from, {names, _} = state) do
-    {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/" <> steam_id)
+  def handle_call({:get, steam_id}, from, state) do
+    IO.puts "Receiving Call Steam #{steam_id}"
+    {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/" <> Integer.to_string(steam_id))
     {:ok, %{content: content}} = SteamMiner.HttpParser.get_element_value(result.body,"div", "apphub_AppName")
-    IO.puts "Collector Reports: #{result.body}"
-    {:reply, [content | result]}
+    IO.puts "Collector Reports: #{content}"
+    {:reply, [content], state}
   end
   
   @doc """

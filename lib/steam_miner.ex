@@ -10,8 +10,8 @@ defmodule SteamMiner do
     poolboy_config = [
       {:name, {:local, pool_name()}},
       {:worker_module, SteamMiner.Collector},
-      {:size, 2},
-      {:max_overflow, 1}
+      {:size, 512},
+      {:max_overflow, 256}
     ]
 
     children = [
@@ -29,6 +29,13 @@ defmodule SteamMiner do
 
   def basic_pool(steam_id) do
     pool_steam_mine(steam_id)    
+  end
+  
+  def parallel_pool(range) do
+    Enum.each(
+      range, 
+      fn(steam_id) -> spawn ( fn() -> pool_steam_mine(steam_id) end ) end 
+    )
   end
 
   defp pool_steam_mine(steam_id) do
