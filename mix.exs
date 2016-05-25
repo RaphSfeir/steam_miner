@@ -14,7 +14,10 @@ defmodule SteamMiner.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison]]
+    [
+      mod: {SteamMiner, []}, 
+      applications: [:logger, :poolboy, :httpoison]
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +32,8 @@ defmodule SteamMiner.Mixfile do
   defp deps do
     [
       {:floki, "~> 0.8.0"},
-      {:httpoison, "~> 0.8.3"}
+      {:httpoison, "~> 0.8.3"},
+      {:poolboy, "~> 1.5"}
     ]
   end
 end

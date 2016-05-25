@@ -7,10 +7,10 @@ defmodule SteamMiner.CollectorTest do
   end
 
   test "Store HTML with app Id", %{collector: collector} do
-    assert SteamMiner.Collector.get(collector, "body") == nil
+    assert SteamMiner.Collector.get(collector) == nil
 
     SteamMiner.Collector.put(collector, "test", 14)
-    assert SteamMiner.Collector.get(collector, "test") == 14
+    assert SteamMiner.Collector.get(collector) == 14
   end
 
 end
