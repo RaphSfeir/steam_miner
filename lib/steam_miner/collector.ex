@@ -39,7 +39,7 @@ defmodule SteamMiner.Collector do
   """
   def handle_call({:get, steam_id}, from, state) do
     IO.puts "Receiving Call Steam #{steam_id}"
-    {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/" <> Integer.to_string(steam_id))
+    {:ok, result} = SteamMiner.HttpDownloader.get_http_url("http://store.steampowered.com/app/" <> Integer.to_string(steam_id), SteamMiner.HttpDownloader.store_headers())
     {:ok, %{content: content}} = SteamMiner.HttpParser.get_element_value(result.body,"div", "apphub_AppName")
     IO.puts "Collector Reports: #{content}"
     {:reply, [content], state}

@@ -1,7 +1,14 @@
 defmodule SteamMiner.HttpDownloader do
 
-  defp api_apps_url do
+  def api_apps_url do
     "http://api.steampowered.com/ISteamApps/GetAppList/v2"
+  end
+
+  def api_headers do
+    [
+      {  "Accept"         , "json" },
+      {  "Connection"     , "keep-alive"}
+    ]
   end
 
   def store_headers do
@@ -15,12 +22,12 @@ defmodule SteamMiner.HttpDownloader do
     ]
   end
 
-  def get_http_url(url) do
+  def get_http_url(url, headers) do
     case HTTPoison.get(url, store_headers()) do
       {:ok, %HTTPoison.Response{body: body, headers: headers, status_code: 200}}
       -> {:ok, %{body: body, headers: headers}}
       {:ok, %HTTPoison.Response{body: body, headers: headers, status_code: 302}}
-      -> {:error, %{reason: "302 returned."}}
+      -> {:ok, %{reason: "302 returned."}}
       {:error, %HTTPoison.Error{id: _, reason: reason}} 
       -> {:error, %{reason: reason}}
     end

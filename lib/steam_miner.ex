@@ -31,6 +31,18 @@ defmodule SteamMiner do
     pool_steam_mine(steam_id)    
   end
   
+  def api_pool() do
+    {:ok, apps} = SteamMiner.HttpDownloader.get_http_url(SteamMiner.HttpDownloader.api_apps_url(), SteamMiner.HttpDownloader.api_headers())
+
+    {:ok, appsList} = Poison.decode(apps.body)
+
+    Enum.each(
+      appsList["applist"]["apps"],
+      fn(app) -> spawn ( fn() -> pool_steam_mine(app["appid"]) end )  end
+    )
+
+  end
+
   def parallel_pool(range) do
     Enum.each(
       range, 
