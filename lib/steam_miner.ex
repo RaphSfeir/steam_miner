@@ -10,8 +10,8 @@ defmodule SteamMiner do
     poolboy_config = [
       {:name, {:local, pool_name()}},
       {:worker_module, SteamMiner.Collector},
-      {:size, 512},
-      {:max_overflow, 256}
+      {:size, 5512},
+      {:max_overflow, 5256}
     ]
 
     children = [

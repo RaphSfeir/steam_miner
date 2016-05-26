@@ -33,6 +33,7 @@ defmodule SteamMiner.Mixfile do
     [
       {:floki, "~> 0.8.0"},
       {:httpoison, "~> 0.8.3"},
+      {:poison, "~> 2.0"},
       {:poolboy, "~> 1.5"}
     ]
   end

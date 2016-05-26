@@ -1,5 +1,9 @@
 defmodule SteamMiner.HttpDownloader do
 
+  defp api_apps_url do
+    "http://api.steampowered.com/ISteamApps/GetAppList/v2"
+  end
+
   def store_headers do
     [
       { "Accept-Encoding", "utf8"},
